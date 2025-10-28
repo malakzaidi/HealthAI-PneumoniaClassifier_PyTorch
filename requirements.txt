@@ -1,0 +1,24 @@
+# Core Dependencies
+torch>=2.0.0
+torchvision>=0.15.0
+numpy>=1.21.0
+
+# Image Processing
+Pillow>=9.0.0
+
+# Machine Learning & Evaluation
+scikit-learn>=1.0.0
+
+# Visualization
+matplotlib>=3.5.0
+seaborn>=0.12.0
+
+# Progress Bars
+tqdm>=4.65.0
+
+# Optional: For Kaggle Dataset Download
+# kaggle>=1.5.12
+
+# Optional: For Jupyter Notebooks
+# jupyter>=1.0.0
+# ipywidgets>=8.0.0

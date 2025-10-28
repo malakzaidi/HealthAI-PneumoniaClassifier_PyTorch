@@ -31,7 +31,11 @@ import os
 import numpy as np
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support, confusion_matrix
 import matplotlib.pyplot as plt
-from google.colab import files
+try:
+    from google.colab import files
+    COLAB_ENV = True
+except ImportError:
+    COLAB_ENV = False
 import zipfile
 
 # ============================================================================
@@ -43,6 +47,12 @@ def download_kaggle_dataset():
     Download Chest X-Ray Pneumonia dataset from Kaggle
     Requires Kaggle API credentials
     """
+    if not COLAB_ENV:
+        print("This function is designed for Google Colab environment.")
+        print("For local setup, please download the dataset manually from:")
+        print("https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia")
+        return None
+    
     # Upload kaggle.json
     print("Please upload your kaggle.json file:")
     uploaded = files.upload()
@@ -67,6 +77,10 @@ def download_kaggle_dataset():
 # Alternative: Mount Google Drive
 def mount_drive():
     """Mount Google Drive to access your data"""
+    if not COLAB_ENV:
+        print("This function is only available in Google Colab environment.")
+        return None
+    
     from google.colab import drive
     drive.mount('/content/drive')
     print("Google Drive mounted!")
@@ -334,7 +348,7 @@ class PneumoniaClassifier:
             probabilities = torch.softmax(output, dim=1)
             _, predicted = torch.max(output, 1)
 
-        class_names = ['NORMAL', 'NORMAL']
+        class_names = ['NORMAL', 'PNEUMONIA']
         prediction = class_names[predicted.item()]
         confidence = probabilities[0][predicted.item()].item()
 
